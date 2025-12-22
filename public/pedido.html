@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head><meta charset="UTF-8"><title>Pedido</title></head>
+<body>
+<h2>Pedido</h2>
+<div id="info">Carregando...</div>
+<script>
+const codigo = location.pathname.split("/").pop();
+fetch('/api/pedido/' + codigo)
+.then(r=>r.json()).then(p=>{
+document.getElementById('info').innerHTML =
+'Produto: '+p.produto+'<br>Status: '+(p.pago?'🟢 Pago':'🔴 Pendente')+'<br>Rastreio: '+(p.rastreio||'Ainda não enviado');
+});
+</script>
+</body>
+</html>

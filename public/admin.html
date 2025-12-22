@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head><meta charset="UTF-8"><title>Admin</title></head>
+<body>
+<h2>Painel Admin</h2>
+<input id="senha" placeholder="Senha"><br><br>
+<input id="codigo" placeholder="Código do pedido"><br><br>
+<label><input type="checkbox" id="pago"> Pago</label><br><br>
+<input id="rastreio" placeholder="Código de rastreio"><br><br>
+<button onclick="salvar()">Salvar</button>
+
+<script>
+function salvar(){
+fetch('/api/admin/update',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
+senha:senha.value,
+codigo:codigo.value,
+pago:pago.checked,
+rastreio:rastreio.value
+})
+}).then(r=>{
+if(r.status===401) alert('Senha incorreta');
+else alert('Pedido atualizado');
+});
+}
+</script>
+</body>
+</html>
