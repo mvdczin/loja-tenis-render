@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 <script src="/js/main.js"></script>
-<img src="/images/nome.jpg">
+<img src="/images/airmax.jpg" />
 </head>
 <body>
 
@@ -17,26 +17,24 @@
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Senha">
   <button onclick="register()">CRIAR</button>
-  <p>Já tem conta? <a href="/login.html">Entrar</a></p>
+  <p>Já tem conta? <a href="/login">Entrar</a></p>
 </section>
 
-<script src="/js/main.js"></script>
 <script>
 async function register() {
   const res = await fetch('/api/register', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({
+    body: JSON.stringify({
       email: email.value,
       password: password.value
     })
   });
   const data = await res.json();
-  if (data.msg) {
-    alert(data.msg);
-    window.location.href = '/login.html';
-  }
+  alert(data.msg || 'Conta criada com sucesso');
+  window.location.href = '/login';
 }
 </script>
+
 </body>
 </html>
