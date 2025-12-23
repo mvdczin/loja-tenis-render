@@ -1,23 +1,23 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
-app.use(cors());
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log("🔥 MongoDB conectado"))
-  .catch(err => console.error("❌ Erro MongoDB:", err.message));
-
+// rota principal → site
 app.get("/", (req, res) => {
-  res.send("API da Loja Streetwear ON 🔥");
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
-const PORT = process.env.PORT || 3000;
+// rota teste da API
+app.get("/api", (req, res) => {
+  res.json({ status: "API da Loja Streetwear ON 🔥" });
+});
+
 app.listen(PORT, () => {
-  console.log("🚀 Servidor rodando na porta", PORT);
+  console.log("Servidor rodando na porta " + PORT);
 });
