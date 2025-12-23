@@ -1,71 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8">
-  <title>Loja de Tênis</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      padding: 20px;
-    }
-    h1 {
-      margin-bottom: 10px;
-    }
-    .tenis {
-      background: #fff;
-      padding: 10px;
-      margin-bottom: 10px;
-      border-radius: 6px;
-    }
-    .preco {
-      font-weight: bold;
-    }
-    .pedido {
-      margin-top: 30px;
-    }
-  </style>
-</head>
-<body>
 
-  <h1>👟 Loja de Tênis</h1>
-  <p>Catálogo:</p>
-
-  <div id="lista">Carregando tênis...</div>
-
-  <div class="pedido">
-    <h3>Consultar pedido</h3>
-    <input id="codigo" placeholder="Código do pedido">
-    <button onclick="verPedido()">Ver pedido</button>
-  </div>
-
-  <script>
-    // listar tenis
-    fetch("/api/tenis")
-      .then(res => res.json())
-      .then(tenis => {
-        if (!tenis.length) {
-          lista.innerHTML = "Nenhum tênis cadastrado.";
-          return;
-        }
-
-        lista.innerHTML = tenis.map(t => `
-          <div class="tenis">
-            <div>${t.nome}</div>
-            <div class="preco">R$ ${t.preco}</div>
-          </div>
-        `).join("");
-      });
-
-    // ir para pedido
-    function verPedido() {
-      if (!codigo.value) {
-        alert("Digite o código do pedido");
-        return;
-      }
-      window.location.href = "/pedido/" + codigo.value;
-    }
-  </script>
-
-</body>
-</html>
+<!DOCTYPE html><html><head>
+<meta charset='utf-8'>
+<title>Loja de Tênis</title>
+<link rel='stylesheet' href='/css/style.css'>
+</head><body>
+<header>👟 LOJA DE TÊNIS</header>
+<nav><a href="/">Home</a><a href="/checkout.html">Checkout</a></nav>
+<main id="produtos"></main>
+<div id="chat"><div id="msgs"></div><input id="chatInput" placeholder="Pergunte aqui"></div>
+<script src="/js/app.js"></script>
+<script src="/js/chat.js"></script>
+</body></html>
