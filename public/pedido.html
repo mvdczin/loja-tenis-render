@@ -4,12 +4,18 @@
 <body>
 <h2>Pedido</h2>
 <div id="info">Carregando...</div>
+
 <script>
-const codigo = location.pathname.split("/").pop();
-fetch('/api/pedido/' + codigo)
-.then(r=>r.json()).then(p=>{
-document.getElementById('info').innerHTML =
-'Produto: '+p.produto+'<br>Status: '+(p.pago?'🟢 Pago':'🔴 Pendente')+'<br>Rastreio: '+(p.rastreio||'Ainda não enviado');
+const c=location.pathname.split("/").pop();
+fetch("/api/pedido/"+c)
+.then(r=>r.json())
+.then(p=>{
+info.innerHTML=`
+Tênis: ${p.nome}<br>
+Preço: R$ ${p.preco}<br>
+Status: ${p.pago?"🟢 Pago":"🔴 Pendente"}<br>
+Rastreio: ${p.rastreio||"Não enviado"}
+`;
 });
 </script>
 </body>
